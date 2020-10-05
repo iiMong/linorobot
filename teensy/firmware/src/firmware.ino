@@ -170,8 +170,27 @@ void moveBase()
     Kinematics::rpm req_rpm = kinematics.getRPM(g_req_linear_vel_x, g_req_linear_vel_y, g_req_angular_vel_z);
 
     //get the current speed of each motor
+#if 0
+    int dir1 = 0, dir2 = 0;
+
+    int current_rpm1 = motor1_encoder.getRPM();
+    if (req_rpm.motor1 < 0) {
+        dir1 = -1;
+    } else if (req_rpm.motor1 > 0) {
+        dir1 = 1;
+    }
+    if (dir1 < 0) current_rpm1 *= -1;
+    int current_rpm2 = motor2_encoder.getRPM();
+    if (req_rpm.motor2 < 0) {
+        dir2 = -1;
+    } else if (req_rpm.motor2 > 0) {
+        dir2 = 1;
+    }
+    if (dir2 < 0) current_rpm2 *= -1;
+#else
     int current_rpm1 = motor1_encoder.getRPM();
     int current_rpm2 = motor2_encoder.getRPM();
+#endif
     int current_rpm3 = motor3_encoder.getRPM();
     int current_rpm4 = motor4_encoder.getRPM();
 
